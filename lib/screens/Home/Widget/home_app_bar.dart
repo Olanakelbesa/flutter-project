@@ -1,5 +1,6 @@
+import 'package:ecom_mcp/screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
-
+import 'package:ecom_mcp/screens/Notification/notification.dart';
 import '../../../constants.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -10,27 +11,62 @@ class CustomAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        IconButton(
-          style: IconButton.styleFrom(
-            backgroundColor: kcontentColor,
-            padding: const EdgeInsets.all(15),
-          ),
-          onPressed: () {},
-          icon: Image.asset(
-            "images/icon.png",
-            height: 20,
+        // Profile Image
+        GestureDetector(
+          onTap: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => Profile(),
+              ),
+            );
+          },
+          child: CircleAvatar(
+            radius: 25,
+            backgroundImage: AssetImage("images/profilepic.jpg"),
           ),
         ),
-        IconButton(
-          style: IconButton.styleFrom(
-            backgroundColor: kcontentColor,
-            padding: const EdgeInsets.all(15),
+        SizedBox(width: 10),
+        // Title Section
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              "Dec 30, 2024",
+              style: TextStyle(fontSize: 13, color: Colors.grey),
+            ),
+            Row(
+              children: const [
+                Text(
+                  'Hello, ',
+                  style: TextStyle(fontSize: 17, color: Colors.grey),
+                ),
+                Text(
+                  'Winnie',
+                  style: TextStyle(
+                    fontSize: 17,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
+        // Notification Icon Button
+        Spacer(),
+        Container(
+          decoration: BoxDecoration(
+            color: kcontentColor, // Ensure this constant is defined
+            borderRadius: BorderRadius.circular(15),
           ),
-          onPressed: () {},
-          iconSize: 30,
-          icon: const Icon(Icons.notifications_outlined),
+          child: IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => NotificationPage(),),);
+            },
+            iconSize: 30,
+            icon: const Icon(Icons.notifications_outlined),
+          ),
         ),
       ],
     );

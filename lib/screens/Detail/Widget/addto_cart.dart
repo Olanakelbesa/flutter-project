@@ -18,9 +18,9 @@ class _AddToCartState extends State<AddToCart> {
   Widget build(BuildContext context) {
     final provider = CartProvider.of(context);
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 15),
+      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
       child: Container(
-        height: 85,
+        height: 70,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(50),
           color: Colors.black,
@@ -76,6 +76,7 @@ class _AddToCartState extends State<AddToCart> {
                 ],
               ),
             ),
+            // SizedBox(width: 10),
             GestureDetector(
               onTap: () {
                 provider.toogleFavorite(widget.product);
@@ -94,19 +95,19 @@ class _AddToCartState extends State<AddToCart> {
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
               },
               child: Container(
-                height: 55,
+                height: 45,
                 decoration: BoxDecoration(
                   color: kprimaryColor,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 alignment: Alignment.center,
-                padding: const EdgeInsets.symmetric(horizontal: 50),
+                padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: const Text(
                   "Add to Cart",
                   style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
-                      fontSize: 20),
+                      fontSize: 18),
                 ),
               ),
             )

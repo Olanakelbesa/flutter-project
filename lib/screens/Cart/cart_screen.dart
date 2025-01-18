@@ -43,14 +43,17 @@ class _CartScreenState extends State<CartScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  style: IconButton.styleFrom(
-                    backgroundColor: Colors.white,
-                    padding: const EdgeInsets.all(15),
-                  ),
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: IconButton(
+                    style: IconButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      padding: const EdgeInsets.all(15),
+                    ),
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.arrow_back_ios,
+                    ),
                   ),
                 ),
                 const Text(
@@ -130,20 +133,23 @@ class _CartScreenState extends State<CartScreen> {
                     ),
                     Positioned(
                       top: 35,
-                      right: 35,
+                      right: 20,
                       child: Column(
                         children: [
                           // for remove items
-                          IconButton(
-                            onPressed: () {
-                              // for remove ites for cart
-                              finalList.removeAt(index);
-                              setState(() {});
-                            },
-                            icon: const Icon(
-                              Icons.delete,
-                              color: Colors.red,
-                              size: 20,
+                          Padding(
+                            padding: const EdgeInsets.only(left: 60.0),
+                            child: IconButton(
+                              onPressed: () {
+                                // for remove ites for cart
+                                finalList.removeAt(index);
+                                setState(() {});
+                              },
+                              icon: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                                size: 20,
+                              ),
                             ),
                           ),
                           // for items quantity
@@ -162,7 +168,7 @@ class _CartScreenState extends State<CartScreen> {
                               children: [
                                 const SizedBox(width: 10),
                                 producrQuantity(Icons.add, index),
-                                 const SizedBox(width: 10),
+                                const SizedBox(width: 10),
                                 Text(
                                   cartItems.quantity.toString(),
                                   style: const TextStyle(

@@ -2,6 +2,7 @@ import 'package:ecom_mcp/constants.dart';
 import 'package:ecom_mcp/screens/Cart/cart_screen.dart';
 import 'package:ecom_mcp/screens/Home/home_screen.dart';
 import 'package:ecom_mcp/screens/Profile/profile.dart';
+import 'package:ecom_mcp/screens/Setting/setting.dart';
 import 'package:flutter/material.dart';
 import 'Favorite/favorite.dart';
 
@@ -15,7 +16,7 @@ class BottomNavBar extends StatefulWidget {
 class _BottomNavBarState extends State<BottomNavBar> {
   int cuttentIndex = 2;
     List screens = const [
-    Scaffold(),
+    Setting(),
     Favorite(),
     HomeScreen(),
     CartScreen(),
@@ -58,7 +59,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
                 });
               },
               icon: Icon(
-                Icons.grid_view_outlined,
+                Icons.settings_outlined,
                 size: 30,
                 color: cuttentIndex == 0 ? kprimaryColor : Colors.grey.shade400,
               ),

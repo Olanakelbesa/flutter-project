@@ -55,7 +55,7 @@ class ProductCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 6),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
@@ -63,7 +63,7 @@ class ProductCard extends StatelessWidget {
                       "\$${product.price}",
                       style: const TextStyle(
                         fontWeight: FontWeight.bold,
-                        fontSize: 17,
+                        fontSize: 14,
                       ),
                     ),
                     Row(
