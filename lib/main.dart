@@ -1,12 +1,18 @@
 import 'package:ecom_mcp/Provider/add_to_cart_provider.dart';
 import 'package:ecom_mcp/Provider/favorite_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'screens/nav_bar_screen.dart';
 import 'package:provider/provider.dart';
 import 'screens/splash_page.dart';
 
-void main() {
+
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
   runApp(const MyApp());
 }
 

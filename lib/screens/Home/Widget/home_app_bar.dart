@@ -1,8 +1,7 @@
 import 'package:ecom_mcp/screens/Profile/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mcp/screens/Notification/notification.dart';
-import '../../../constants.dart';
-
+import 'package:ecom_mcp/constants.dart';
 class CustomAppBar extends StatelessWidget {
   const CustomAppBar({
     super.key,
@@ -47,6 +46,7 @@ class CustomAppBar extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,
+                    color: kprimaryColor,
                   ),
                 ),
               ],

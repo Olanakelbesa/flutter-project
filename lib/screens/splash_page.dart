@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'dart:async'; // For timers
 import 'package:ecom_mcp/screens/nav_bar_screen.dart';
-import 'package:ecom_mcp/constants.dart';
 
 class SplashPage extends StatefulWidget {
+  const SplashPage({super.key});
+
   @override
   State<SplashPage> createState() => _SplashPageState();
 }
@@ -31,7 +32,7 @@ class _SplashPageState extends State<SplashPage> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             // Logo or branding
-            Image.asset('images/logo.png', height: 250),
+            Image.asset('images/logo.png', height: 300),
             // const SizedBox(height: 5),
             const Text(
               'Oli Store',

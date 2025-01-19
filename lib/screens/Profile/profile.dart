@@ -10,7 +10,7 @@ class Profile extends StatelessWidget {
       body: Stack(
         children: [
           Image.asset(
-            "images/back1.jpg",
+            "images/background1.jpg",
             fit: BoxFit.cover,
             height: size.height,
             width: size.width,
@@ -85,7 +85,7 @@ class Profile extends StatelessWidget {
                                     Container(
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(20),
-                                        color: Colors.pink,
+                                        color: Color.fromARGB(255, 0, 118, 172),
                                       ),
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 8, horizontal: 12),

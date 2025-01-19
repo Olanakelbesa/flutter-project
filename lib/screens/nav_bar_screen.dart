@@ -15,7 +15,7 @@ class BottomNavBar extends StatefulWidget {
 
 class _BottomNavBarState extends State<BottomNavBar> {
   int cuttentIndex = 2;
-    List screens = const [
+  List screens = const [
     Setting(),
     Favorite(),
     HomeScreen(),
@@ -25,11 +25,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false, // Prevents resizing when keyboard shows
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           setState(() {
             cuttentIndex = 2;
-          
           });
         },
         shape: const CircleBorder(),
