@@ -1,3 +1,4 @@
+import 'package:ecom_mcp/screens/Login/signout.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mcp/constants.dart';
 
@@ -51,7 +52,7 @@ class Setting extends StatelessWidget {
         ),
       ),
       body: const Center(
-        child: Text("Setting Page"),
+        child: Signout(),
       ),
     );
   }

@@ -42,7 +42,7 @@ class CustomAppBar extends StatelessWidget {
                   style: TextStyle(fontSize: 17, color: Colors.grey),
                 ),
                 Text(
-                  'Winnie',
+                  'Olana',
                   style: TextStyle(
                     fontSize: 17,
                     fontWeight: FontWeight.bold,

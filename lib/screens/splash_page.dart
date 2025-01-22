@@ -1,6 +1,6 @@
+import 'package:ecom_mcp/screens/Login/signin.dart';
 import 'package:flutter/material.dart';
 import 'dart:async'; // For timers
-import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -18,7 +18,7 @@ class _SplashPageState extends State<SplashPage> {
     Timer(const Duration(seconds: 5), () {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const BottomNavBar()),
+        MaterialPageRoute(builder: (context) => SignIn()),
       );
     });
   }
