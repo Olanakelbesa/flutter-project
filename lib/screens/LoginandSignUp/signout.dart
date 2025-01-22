@@ -1,5 +1,5 @@
 import 'package:ecom_mcp/constants.dart';
-import 'package:ecom_mcp/screens/Login/signin.dart';
+import 'package:ecom_mcp/screens/LoginandSignUp/signin.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
