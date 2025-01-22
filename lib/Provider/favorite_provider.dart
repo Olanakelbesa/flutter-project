@@ -6,6 +6,7 @@ import '../models/product_model.dart';
 class FavoriteProvider extends ChangeNotifier {
   final List<Product> _favorite = [];
   List<Product> get favorites => _favorite;
+  
   void toggleFavorite(Product product) {
     if (_favorite.contains(product)) {
       _favorite.remove(product);

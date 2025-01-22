@@ -32,7 +32,7 @@ class CustomAppBar extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Dec 30, 2024",
+              "Jan 21, 2025",
               style: TextStyle(fontSize: 13, color: Colors.grey),
             ),
             Row(

@@ -79,7 +79,7 @@ class _AddToCartState extends State<AddToCart> {
             // SizedBox(width: 10),
             GestureDetector(
               onTap: () {
-                provider.toogleFavorite(widget.product);
+                provider.addToCart(widget.product);
                 // if items is add then show this snackbar
                 const snackBar = SnackBar(
                   content: Text(

@@ -1,13 +1,51 @@
+import 'dart:async';
 import 'package:flutter/material.dart';
 
-class ImageSlider extends StatelessWidget {
-  final Function(int) onChange;
-  final int currentSlide;
-  const ImageSlider({
-    super.key,
-    required this.currentSlide,
-    required this.onChange,
-  });
+class ImageSlider extends StatefulWidget {
+  const ImageSlider({super.key});
+
+  @override
+  State<ImageSlider> createState() => _ImageSliderState();
+}
+
+class _ImageSliderState extends State<ImageSlider> {
+  final PageController _pageController = PageController();
+  int currentSlide = 0;
+  late Timer _timer;
+
+  final List<String> images = [
+    "images/slider5.jpg",
+    "images/image1.png",
+    "images/slider6.jpg",
+    "images/slider4.jpg",
+    "images/slider8.jpg",
+  ];
+
+  @override
+  void initState() {
+    super.initState();
+    _startAutoSlide();
+  }
+
+  @override
+  void dispose() {
+    _timer.cancel();
+    _pageController.dispose();
+    super.dispose();
+  }
+
+  void _startAutoSlide() {
+    _timer = Timer.periodic(const Duration(seconds: 4), (timer) {
+      if (currentSlide < images.length - 1) {
+        currentSlide++;
+      } else {
+        currentSlide = 0;
+      }
+
+      _pageController.animateToPage(currentSlide,
+          duration: Duration(milliseconds: 400), curve: Curves.easeInOut);
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,33 +56,23 @@ class ImageSlider extends StatelessWidget {
           width: double.infinity,
           child: ClipRRect(
             borderRadius: BorderRadius.circular(15),
-            child: PageView(
+            child: PageView.builder(
+              controller: _pageController,
               scrollDirection: Axis.horizontal,
               allowImplicitScrolling: true,
-              onPageChanged: onChange,
+              onPageChanged: (index) {
+                setState(() {
+                  currentSlide = index;
+                });
+              },
               physics: const ClampingScrollPhysics(),
-              children: [
-                Image.asset(
-                  "images/slider5.jpg",
+              itemCount: images.length,
+              itemBuilder: (context, index) {
+                return Image.asset(
+                  images[index],
                   fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "images/image1.png",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "images/slider3.png",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "images/slider4.jpg",
-                  fit: BoxFit.cover,
-                ),
-                Image.asset(
-                  "images/slider3.png",
-                  fit: BoxFit.cover,
-                ),
-              ],
+                );
+              },
             ),
           ),
         ),
@@ -55,20 +83,21 @@ class ImageSlider extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
-                5,
+                images.length,
                 (index) => AnimatedContainer(
-                  duration: const Duration(microseconds: 300),
-                  width: currentSlide == index ? 15 : 8,
+                  duration: const Duration(milliseconds: 300),
+                  width: 8,
                   height: 8,
                   margin: const EdgeInsets.only(right: 3),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color: currentSlide == index
-                          ? Colors.black
-                          : Colors.transparent,
-                      border: Border.all(
-                        color: Colors.black,
-                      )),
+                    borderRadius: BorderRadius.circular(10),
+                    color: currentSlide == index
+                        ? Colors.black
+                        : Colors.transparent,
+                    border: Border.all(
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
               ),
             ),
