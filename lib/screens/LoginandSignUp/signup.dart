@@ -1,5 +1,6 @@
 import 'package:ecom_mcp/constants.dart';
 import 'package:ecom_mcp/screens/LoginandSignUp/signin.dart';
+import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 import 'package:ecom_mcp/service/Auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
@@ -96,7 +97,11 @@ class _SignUpState extends State<SignUp> {
                   'images/google_icon.png',
                   'Continue with Google',
                   () async {
-                    await authClass.googleSignIn(context);
+                    await authClass.loginWithGoogle();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (builder) => BottomNavBar()),
+                        (route) => false);
                   },
                 ),
                 SizedBox(height: 10),

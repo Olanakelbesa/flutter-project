@@ -5,7 +5,6 @@ import 'package:ecom_mcp/service/Auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
-
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
 
@@ -98,7 +97,11 @@ class _SignInState extends State<SignIn> {
                   'images/google_icon.png',
                   'Continue with Google',
                   () async {
-                    await authClass.googleSignIn(context);
+                    await authClass.loginWithGoogle();
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(builder: (builder) => BottomNavBar()),
+                        (route) => false);
                   },
                 ),
                 SizedBox(height: 10),
@@ -125,7 +128,6 @@ class _SignInState extends State<SignIn> {
                         style: TextStyle(color: kprimaryColor),
                       ),
                     ),
-                    
                   ],
                 ),
                 TextButton(
