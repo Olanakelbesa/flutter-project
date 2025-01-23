@@ -93,6 +93,8 @@ class _SignUpState extends State<SignUp> {
                   ),
                 ),
                 SizedBox(height: 20),
+                Text("Or"),
+                SizedBox(height: 20),
                 buttonItem(
                   'images/google_icon.png',
                   'Continue with Google',
@@ -105,11 +107,7 @@ class _SignUpState extends State<SignUp> {
                   },
                 ),
                 SizedBox(height: 10),
-                buttonItem(
-                  'images/telephone.png',
-                  'Continue with Phone Number',
-                  () {},
-                ),
+                
                 SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,

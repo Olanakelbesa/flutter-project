@@ -1,5 +1,6 @@
 import 'package:ecom_mcp/Provider/add_to_cart_provider.dart';
 import 'package:ecom_mcp/screens/Cart/check_out.dart';
+import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 import '../../constants.dart';
 
@@ -50,7 +51,9 @@ class _CartScreenState extends State<CartScreen> {
                       backgroundColor: Colors.white,
                       padding: const EdgeInsets.all(15),
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (builder) => BottomNavBar()));
+                    },
                     icon: const Icon(
                       Icons.arrow_back_ios,
                     ),

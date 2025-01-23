@@ -1,4 +1,5 @@
 import 'package:ecom_mcp/screens/LoginandSignUp/signout.dart';
+import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:ecom_mcp/constants.dart';
 
@@ -20,7 +21,9 @@ class Setting extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  Navigator.pop(context); // Navigates back
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => BottomNavBar()));
+                  // Navigates back
                 },
                 icon: Container(
                   width: 50,

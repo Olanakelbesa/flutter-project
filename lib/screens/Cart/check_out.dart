@@ -1,13 +1,15 @@
 import 'package:ecom_mcp/Provider/add_to_cart_provider.dart';
 import 'package:ecom_mcp/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart'; // Import Provider
 
 class CheckOutBox extends StatelessWidget {
   const CheckOutBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final provider = CartProvider.of(context);
+    final provider = Provider.of<CartProvider>(context); // Use Provider.of
+
     return Container(
       height: 300,
       width: double.infinity,
@@ -27,13 +29,11 @@ class CheckOutBox extends StatelessWidget {
                 borderRadius: BorderRadius.circular(30),
                 borderSide: BorderSide.none,
               ),
-              contentPadding: const EdgeInsets.symmetric(
-                vertical: 5,
-                horizontal: 15,
-              ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 5, horizontal: 15),
               filled: true,
               fillColor: kcontentColor,
-              hintText: "Enter Discoutn Code",
+              hintText: "Enter Discount Code",
               hintStyle: const TextStyle(
                 color: Colors.grey,
                 fontWeight: FontWeight.w600,
@@ -57,7 +57,7 @@ class CheckOutBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "SbuTotal",
+                "Subtotal",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   color: Colors.grey,
@@ -65,12 +65,12 @@ class CheckOutBox extends StatelessWidget {
                 ),
               ),
               Text(
-                "\$${provider.totalPrice()}",
+                "\$${provider.totalPrice()}", // Use provider.totalPrice()
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16,
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(height: 10),
@@ -80,39 +80,65 @@ class CheckOutBox extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               const Text(
-                "total",
+                "Total",
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
               ),
               Text(
-                "\$${provider.totalPrice()}",
+                "\$${provider.totalPrice()}", // Use provider.totalPrice()
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 18,
                 ),
-              )
+              ),
             ],
           ),
           const SizedBox(height: 20),
           ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: kprimaryColor,
-                minimumSize: const Size(double.infinity, 55),
-              ),
-              onPressed: () {},
-              child: const Text(
-                "Check Out",
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                  color: Colors.white,
+            style: ElevatedButton.styleFrom(
+              backgroundColor: kprimaryColor,
+              minimumSize: const Size(double.infinity, 55),
+            ),
+            onPressed: () {
+              // Add confirmation logic here
+              showDialog(
+                context: context,
+                builder: (context) => AlertDialog(
+                  title: const Text('Confirm Checkout'),
+                  content: const Text('Are you sure you want to checkout?'),
+                  actions: [
+                    TextButton(
+                      onPressed: () => Navigator.pop(context),
+                      child: const Text('Cancel'),
+                    ),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pop(context); // Close the dialog
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(
+                            content: Text('Checkout successful!'),
+                          ),
+                        );
+                      },
+                      child: const Text('Checkout'),
+                    ),
+                  ],
                 ),
-              ))
+              );
+            },
+            child: const Text(
+              "Check Out",
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: 16,
+                color: Colors.white,
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 }
-// now we add the provider and display the total price

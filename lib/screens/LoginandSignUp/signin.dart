@@ -1,4 +1,5 @@
 import 'package:ecom_mcp/constants.dart';
+import 'package:ecom_mcp/screens/LoginandSignUp/forgotPassowrd.dart';
 import 'package:ecom_mcp/screens/LoginandSignUp/signup.dart';
 import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 import 'package:ecom_mcp/service/Auth_service.dart';
@@ -93,6 +94,8 @@ class _SignInState extends State<SignIn> {
                   ),
                 ),
                 SizedBox(height: 20),
+                Text("Or"),
+                SizedBox(height: 20),
                 buttonItem(
                   'images/google_icon.png',
                   'Continue with Google',
@@ -105,11 +108,7 @@ class _SignInState extends State<SignIn> {
                   },
                 ),
                 SizedBox(height: 10),
-                buttonItem(
-                  'images/telephone.png',
-                  'Continue with Phone Number',
-                  () {},
-                ),
+                
                 SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -131,7 +130,9 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (builder)=> ForgotPassword()));
+                  },
                   child: Text(
                     'Forgot Password?',
                     style: TextStyle(color: kprimaryColor),
