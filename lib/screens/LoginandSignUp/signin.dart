@@ -1,9 +1,10 @@
 import 'package:ecom_mcp/constants.dart';
-import 'package:ecom_mcp/screens/LoginandSignUp/signin.dart';
 import 'package:ecom_mcp/screens/LoginandSignUp/signup.dart';
+import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 import 'package:ecom_mcp/service/Auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -57,7 +58,7 @@ class _SignInState extends State<SignIn> {
                       });
                       Navigator.pushAndRemoveUntil(
                         context,
-                        MaterialPageRoute(builder: (builder) => BottomAppBar()),
+                        MaterialPageRoute(builder: (builder) => BottomNavBar()),
                         (route) => false,
                       );
                     } catch (e) {
