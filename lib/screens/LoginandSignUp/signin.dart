@@ -1,8 +1,9 @@
 import 'package:ecom_mcp/constants.dart';
+import 'package:ecom_mcp/screens/LoginandSignUp/signin.dart';
 import 'package:ecom_mcp/screens/LoginandSignUp/signup.dart';
+import 'package:ecom_mcp/service/Auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
@@ -17,6 +18,8 @@ class _SignInState extends State<SignIn> {
   final TextEditingController _pwdControl = TextEditingController();
 
   bool circular = false;
+
+  AuthClass authClass = AuthClass();
 
   @override
   Widget build(BuildContext context) {
@@ -49,28 +52,21 @@ class _SignInState extends State<SignIn> {
                         email: _emailControl.text,
                         password: _pwdControl.text,
                       );
-                      print(_emailControl.text);
-                      print(_pwdControl.text);
                       setState(() {
                         circular = false;
                       });
                       Navigator.pushAndRemoveUntil(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => BottomNavBar()),
-                          (route) => false);
-                      // print(userCredential.user?.email);
+                        context,
+                        MaterialPageRoute(builder: (builder) => BottomAppBar()),
+                        (route) => false,
+                      );
                     } catch (e) {
-                      // Handle sign-up errors
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(e.toString())),
                       );
-                      print(e.toString());
                       setState(() {
                         circular = false;
                       });
-                      print(e.toString());
                     }
                   },
                   child: Container(
@@ -100,17 +96,17 @@ class _SignInState extends State<SignIn> {
                 buttonItem(
                   'images/google_icon.png',
                   'Continue with Google',
+                  () async {
+                    await authClass.googleSignIn(context);
+                  },
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 buttonItem(
                   'images/telephone.png',
                   'Continue with Phone Number',
+                  () {},
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -118,15 +114,17 @@ class _SignInState extends State<SignIn> {
                     TextButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (builder) => SignUp()),
-                            (route) => false);
+                          context,
+                          MaterialPageRoute(builder: (builder) => SignUp()),
+                          (route) => false,
+                        );
                       },
                       child: Text(
                         'Sign Up',
                         style: TextStyle(color: kprimaryColor),
                       ),
-                    )
+                    ),
+                    
                   ],
                 ),
                 TextButton(
@@ -145,11 +143,10 @@ class _SignInState extends State<SignIn> {
   }
 }
 
-// Widget for standard text input
 Widget inputItem(
-    String itemHintText, bool isPassword, TextEditingController conttoller) {
+    String itemHintText, bool isPassword, TextEditingController controller) {
   return TextField(
-    controller: conttoller,
+    controller: controller,
     obscureText: isPassword,
     decoration: InputDecoration(
       hintText: itemHintText,
@@ -174,20 +171,19 @@ Widget inputItem(
   );
 }
 
-Widget buttonItem(
-  String itemsImage,
-  String itemsText,
-) {
+Widget buttonItem(String itemsImage, String itemsText, Function onTap) {
   return InkWell(
+    onTap: () => onTap(),
     child: Container(
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            color: const Color.fromARGB(255, 198, 198, 198),
-            width: 1,
-          )),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: const Color.fromARGB(255, 198, 198, 198),
+          width: 1,
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [

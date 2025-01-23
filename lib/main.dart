@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'screens/splash_page.dart';
-import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+// import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
 
 
 void main() async {

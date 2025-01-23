@@ -1,22 +1,24 @@
 import 'package:ecom_mcp/constants.dart';
 import 'package:ecom_mcp/screens/LoginandSignUp/signin.dart';
+import 'package:ecom_mcp/service/Auth_service.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
-import 'package:ecom_mcp/screens/nav_bar_screen.dart';
 
 class SignUp extends StatefulWidget {
   const SignUp({super.key});
 
   @override
-  State<SignUp> createState() => _SignInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _SignInState extends State<SignUp> {
+class _SignUpState extends State<SignUp> {
   firebase_auth.FirebaseAuth firebaseAuth = firebase_auth.FirebaseAuth.instance;
   final TextEditingController _emailControl = TextEditingController();
   final TextEditingController _pwdControl = TextEditingController();
 
   bool circular = false;
+
+  AuthClass authClass = AuthClass();
 
   @override
   Widget build(BuildContext context) {
@@ -45,32 +47,25 @@ class _SignInState extends State<SignUp> {
                       circular = true;
                     });
                     try {
-                       await firebaseAuth.createUserWithEmailAndPassword(
+                      await firebaseAuth.createUserWithEmailAndPassword(
                         email: _emailControl.text,
                         password: _pwdControl.text,
                       );
-                      print(_emailControl.text);
-                      print(_pwdControl.text);
                       setState(() {
                         circular = false;
                       });
                       Navigator.pushAndRemoveUntil(
-                          // ignore: use_build_context_synchronously
-                          context,
-                          MaterialPageRoute(
-                              builder: (builder) => SignIn()),
-                          (route) => false);
-                      // print(userCredential.user?.email);
+                        context,
+                        MaterialPageRoute(builder: (builder) => SignIn()),
+                        (route) => false,
+                      );
                     } catch (e) {
-                      // Handle sign-up errors
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(e.toString())),
                       );
-                      print(e.toString());
                       setState(() {
                         circular = false;
                       });
-                      print(e.toString());
                     }
                   },
                   child: Container(
@@ -86,7 +81,7 @@ class _SignInState extends State<SignUp> {
                               color: Colors.white,
                             )
                           : Text(
-                              'Sign In',
+                              'Sign Up',
                               style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w600,
@@ -100,17 +95,17 @@ class _SignInState extends State<SignUp> {
                 buttonItem(
                   'images/google_icon.png',
                   'Continue with Google',
+                  () async {
+                    await authClass.googleSignIn(context);
+                  },
                 ),
-                SizedBox(
-                  height: 10,
-                ),
+                SizedBox(height: 10),
                 buttonItem(
                   'images/telephone.png',
                   'Continue with Phone Number',
+                  () {},
                 ),
-                SizedBox(
-                  height: 5,
-                ),
+                SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -118,9 +113,10 @@ class _SignInState extends State<SignUp> {
                     TextButton(
                       onPressed: () {
                         Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(builder: (builder) => SignIn()),
-                            (route) => false);
+                          context,
+                          MaterialPageRoute(builder: (builder) => SignIn()),
+                          (route) => false,
+                        );
                       },
                       child: Text(
                         'Sign In',
@@ -129,7 +125,6 @@ class _SignInState extends State<SignUp> {
                     )
                   ],
                 ),
-                
               ],
             ),
           ),
@@ -139,11 +134,10 @@ class _SignInState extends State<SignUp> {
   }
 }
 
-// Widget for standard text input
 Widget inputItem(
-    String itemHintText, bool isPassword, TextEditingController conttoller) {
+    String itemHintText, bool isPassword, TextEditingController controller) {
   return TextField(
-    controller: conttoller,
+    controller: controller,
     obscureText: isPassword,
     decoration: InputDecoration(
       hintText: itemHintText,
@@ -168,20 +162,19 @@ Widget inputItem(
   );
 }
 
-Widget buttonItem(
-  String itemsImage,
-  String itemsText,
-) {
+Widget buttonItem(String itemsImage, String itemsText, Function onTap) {
   return InkWell(
+    onTap: () => onTap(),
     child: Container(
       width: double.infinity,
       height: 50,
       decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(15),
-          border: Border.all(
-            color: const Color.fromARGB(255, 198, 198, 198),
-            width: 1,
-          )),
+        borderRadius: BorderRadius.circular(15),
+        border: Border.all(
+          color: const Color.fromARGB(255, 198, 198, 198),
+          width: 1,
+        ),
+      ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
